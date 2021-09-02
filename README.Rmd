@@ -1,0 +1,50 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# fiinder
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+Fiinder allows for simple access to good real estate funds.
+
+## Installation
+
+You can install the development version from [GitHub](https://github.com/) with:
+
+``` r
+devtools::install_github("92amartins/fiinder")
+```
+## Usage
+
+At the moment, fiinder is a single-function package. You can use `fiinder::find`
+in order to get top brazilian real estate funds in terms of dividend yield and
+price.
+
+The most basic usage is to simply call the function with default arguments and
+get the results back
+
+```{r usage, message=FALSE}
+library(fiinder)
+fiinder::find()
+```
+
+Alternatively, you can specify the number of funds retrieved (`n`) and other
+parameters such as stock liquidity (`liq`) minimum and maximum price/value relations
+(`min_p_vpa` and `max_p_vpa` respectively).
+
+```{r}
+fiinder::find(n=5, liq = 10000, min_p_vpa = 0.5, max_p_vpa = 1.2)
+```
