@@ -25,8 +25,8 @@ find <- function(n=10, liq=1000, min_p_vpa=0.7, max_p_vpa=1){
   df %>%
     dplyr::filter(`DY (12M)Média` != "N/A" & `P/VPA` != "N/A") %>%
     dplyr::filter(as.integer(`Liquidez Diária`) > liq) %>%
-    dplyr::filter((gsub(",", ".", `P/VPA`) > min_p_vpa) & (gsub(",", ".", `P/VPA`) < max_p_vpa)) %>%
+    dplyr::filter((gsub(",", ".", `P/VPA`) >= min_p_vpa) & (gsub(",", ".", `P/VPA`) <= max_p_vpa)) %>%
     dplyr::arrange(desc(`DY (12M)Média`)) %>%
-    dplyr::select(`Códigodo fundo`,`DY (12M)Média`, `P/VPA`, `Liquidez Diária`) %>%
+    dplyr::select(`Códigodo fundo`,`DY (12M)Média`, `P/VPA`, `Preço Atual`, `Liquidez Diária`) %>%
     dplyr::top_n(n, `DY (12M)Média`)
 }
