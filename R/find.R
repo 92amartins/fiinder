@@ -7,8 +7,6 @@
 #'
 #' @return data.frame of top funds.
 #'
-#' @import xml2
-#' @import rvest
 #' @import dplyr
 #'
 #' @export
@@ -16,12 +14,7 @@
 #' @examples
 #' find()
 find <- function(n=10, liq=1000, min_p_vpa=0.7, max_p_vpa=1){
-  URL <- "https://www.fundsexplorer.com.br/ranking"
-  page = xml2::read_html(URL)
-
-  df = rvest::html_node(page, "#table-ranking") %>%
-    rvest::html_table()
-
+  df <- fetch()
   df %>%
     dplyr::filter(`DY (12M)Média` != "N/A" & `P/VPA` != "N/A") %>%
     dplyr::filter(as.integer(`Liquidez Diária`) > liq) %>%
