@@ -15,9 +15,7 @@
 #' @examples
 #' reinvest()
 reinvest <- function(criteria="dividend"){
-  config = yaml::yaml.load_file("assets.yaml")
-  assets = config$assets
-
+  assets = load_assets()
   df = fetch()
 
   sorted_assets <- df %>%
@@ -31,4 +29,15 @@ reinvest <- function(criteria="dividend"){
   }
 
   sorted_assets
+}
+
+load_assets <- function(){
+  tryCatch(
+    expr = {
+      config = yaml::yaml.load_file("assets.yaml")
+      assets = config$assets
+      assets
+    },
+    error = function(e) stop("Did you specify assets in assets.yaml?")
+  )
 }
