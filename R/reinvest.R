@@ -34,7 +34,8 @@ reinvest <- function(criteria="dividend"){
 load_assets <- function(){
   tryCatch(
     expr = {
-      config = yaml::yaml.load_file("assets.yaml")
+      assets_path <- system.file("config", "assets.yaml", package = "fiinder")
+      config = yaml::yaml.load_file(assets_path)
       assets = config$assets
       assets
     },
